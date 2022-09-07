@@ -5,6 +5,11 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #555;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  html, body, #root{
+    background-color: #efefef;
+    height: 100vh;
   }
 `

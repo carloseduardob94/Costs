@@ -21,7 +21,9 @@ export const NewProject = () => {
       .then(data => {
         console.log(data)
         //redirect
-        navigate('/projects', {message: 'Projeto criado com sucesso!'})
+        navigate('/projects', {
+          state: 'Projeto criado com sucesso!'
+        })
       })
       .catch(error => console.log(error))
   }

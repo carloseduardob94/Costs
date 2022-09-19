@@ -3,7 +3,6 @@ import { Layout } from '../Layout'
 import logo from '../../img/costs_logo.png'
 import { Container } from './styles'
 
-// alo teste 1 2
 
 export const Navbar = () => {
   return(

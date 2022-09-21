@@ -12,6 +12,7 @@ import { ProjectCard } from '../../components/ProjectCard'
 export const Projects = () => {
   const [projects, setProjects] = useState([])
   const [removeLoading, setRemoveLoading] = useState(false)
+  const [projectMessage, setProjectMessage] = useState('')
 
   const location = useLocation()
   let message = ''
@@ -19,19 +20,34 @@ export const Projects = () => {
     message = location.state
   }
 
+  function removeProject(id){
+    fetch(`http://localhost:5000/projects/${id}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json'}
+    }).then(response => response.json())
+      .then(() => {
+        setProjects(projects.filter(project => project.id !== id))
+        setProjectMessage('Projeto removido com sucesso.')
+      })
+    .catch(err=>console.log(err))
+  }
+
   useEffect(() => {
-    fetch('http://localhost:5000/projects', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+    setTimeout(() => {
+      fetch('http://localhost:5000/projects', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+        setProjects(data)
+        setRemoveLoading(true)
     })
-    .then(response => response.json())
-    .then(data => {
-      setProjects(data)
-      setRemoveLoading(true)
-  })
-    .catch((err) => console.log(err))
+      .catch((err) => console.log(err))
+      
+    }, 300)
   }, [])
   
   return(
@@ -41,6 +57,7 @@ export const Projects = () => {
         <LinkButton to="/newproject" text="Criar Projeto" />
       </div>
       {message && <Message msg={message} type="sucess" />}
+      {projectMessage && <Message msg={projectMessage} type="sucess" />}
       <Layout customClass="start">
       {projects.length > 0 && 
           projects.map((project, index) => (
@@ -49,7 +66,8 @@ export const Projects = () => {
               key={project.id}
               name={project.name} 
               budget={project.budget} 
-              category={project.category.name} 
+              category={project.category.name}
+              handleRemove={removeProject} 
             />
           ))
         }

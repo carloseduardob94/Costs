@@ -47,8 +47,8 @@ export const ProjectForm = ({ btnText, handleSubmit, projectData }) => {
         placeholder="Insira o nome do projeto"
         handleOnChange={handleChange}
         value={project.name ? project.name : ''}
-
       />
+
       <Input 
         type="number" 
         text="Orçamento do projeto" 
@@ -57,6 +57,7 @@ export const ProjectForm = ({ btnText, handleSubmit, projectData }) => {
         handleOnChange={handleChange}
         value={project.budget  ? project.budget : ''}
       />
+
       <Select 
         name="category_id" 
         text="Selecione a categoria" 

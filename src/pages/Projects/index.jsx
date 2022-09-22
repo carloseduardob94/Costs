@@ -46,7 +46,6 @@ export const Projects = () => {
         setRemoveLoading(true)
     })
       .catch((err) => console.log(err))
-      
     }, 300)
   }, [])
   

@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   padding: 2em;
-  > div h1,
-  div h2,
+  div h1,
+  h2,
   div p {
     margin-bottom: 0.5em;
   }

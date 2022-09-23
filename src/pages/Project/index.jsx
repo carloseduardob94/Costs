@@ -8,11 +8,13 @@ import { Layout } from '../../components/Layout'
 import { ProjectForm } from '../../components/ProjectForm'
 import { Message } from '../../components/Message'
 import { ServiceForm } from '../../components/ServiceForm'
+import { ServiceCard } from '../../components/ServiceCard'
 
 export const Project = () => {
   const { id } = useParams()
 
   const [project, setProject] = useState([])
+  const [services, setServices] = useState([])
   const [showProjectForm, setShowProjectForm] = useState(false)
   const [showServiceForm, setShowServiceForm] = useState(false)
   const [message, setMessage] = useState('')
@@ -27,6 +29,7 @@ export const Project = () => {
 
   function createService(project){
     setMessage('')
+
     // last service
     const lastService = project.services[project.services.length - 1]
 
@@ -34,13 +37,12 @@ export const Project = () => {
 
     const lastServiceCost = lastService.cost
 
-    const newCost = parseFloat(project.cost + parseFloat(lastServiceCost))
+    const newCost = parseFloat(project.cost) + parseFloat(lastServiceCost)
 
     // maximum value validation
     if (newCost > parseFloat(project.budget)){
       setMessage('Orçamento ultrapassado, verifique o valor do serviço')
       setType('error')
-      console.log(project.services)
       project.services.pop()
       return false
     }
@@ -55,7 +57,10 @@ export const Project = () => {
       body: JSON.stringify(project)
     }).then(response => response.json())
     .then(data => {
-      // exibir os serviços
+      setServices(data.services)
+      setShowServiceForm(!showServiceForm)
+      setMessage('Serviço adicionado')
+      setType('success')
     })
     .catch(err => console.log(err))
   }
@@ -82,6 +87,29 @@ export const Project = () => {
     .catch(err => console.log(err))
   }
 
+  function removeService(id, cost){
+    setMessage('')
+    const servicesUpdated = project.services.filter((service) => service.id !== id) 
+
+    const projectUpdated = project
+
+    projectUpdated.services = servicesUpdated
+    projectUpdated.cost = parseFloat(projectUpdated.cost) - parseFloat(cost)
+
+    fetch(`http://localhost:5000/projects/${projectUpdated.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(projectUpdated)
+    }).then(response => response.json())
+    .then(() => {
+      setProject(projectUpdated)
+      setServices(servicesUpdated)
+      setMessage('Serviço removido com sucesso')
+      setType('success')
+    })
+    .catch(err => console.log(err))
+  }
+
   useEffect(() => {
     fetch(`http://localhost:5000/projects/${id}`, {
       method: 'GET',
@@ -89,6 +117,7 @@ export const Project = () => {
     }).then(response => response.json())
       .then(data => {
         setProject(data)
+        setServices(data.services)
       }).catch(err => console.log(err))
   }, [id])
   
@@ -99,17 +128,17 @@ export const Project = () => {
         {message && <Message type={type} msg={message} />}
         <div className="details_container">
           <h1>Projeto: {project.name}</h1>
-          <button onClick={toggleProjectForm}>{!showProjectForm ? 'Editar projeto' : 'Fechar'}</button>
+          <button className="edit_project_button" onClick={toggleProjectForm}>{!showProjectForm ? 'Editar projeto' : 'Fechar'}</button>
           {!showProjectForm ? (
             <div className="project_info">
               <p>
                 <span>Categoria:</span> {project.category.name}
               </p>
               <p>
-                <span>Total de Orçamento</span> {project.budget}
+                <span>Total de Orçamento:</span> {project.budget}
               </p>
               <p>
-                <span>Total Utilizado</span> R${project.cost}
+                <span>Total Utilizado:</span> R${project.cost}
               </p>
             </div>
           ) : (
@@ -124,7 +153,7 @@ export const Project = () => {
         </div>
         <div className="service_form_container">
           <h2>Adicione um serviço:</h2>
-          <button onClick={toggleServiceForm}>{!showServiceForm ? 'Adicionar serviço' : 'Fechar'}</button>
+          <button className="edit_project_button" onClick={toggleServiceForm}>{!showServiceForm ? 'Adicionar serviço' : 'Fechar'}</button>
           <div className="project_info">
             {showServiceForm && (
               <ServiceForm
@@ -137,7 +166,19 @@ export const Project = () => {
         </div>
         <h2>Serviços</h2>
         <Layout customClass="start">
-          <p>Itens de serviços</p>
+          {services.length > 0 &&
+            services.map((service) => (
+              <ServiceCard
+                id={service.id} 
+                name={service.name} 
+                cost={service.cost} 
+                description={service.description} 
+                key={service.id}
+                handleRemove={removeService} 
+              />
+            ))
+          }
+          {services.length === 0 && <p>Não há serviços cadastrados.</p> }
         </Layout>
       </Layout>
     </Container>

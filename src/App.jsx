@@ -1,8 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { Home } from './pages/Home'
-import { Company } from './pages/Company'
-import { Contact } from './pages/Contact'
 import { NewProject } from './pages/NewProject'
 import { Projects } from './pages/Projects'
 import { Project } from './pages/Project'
@@ -18,9 +16,7 @@ const App = () => {
       <Layout customClass="min-height">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/company" element={<Company />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/newproject" element={<NewProject />} />
           <Route path="/project/:id" element={<Project />} />
         </Routes>

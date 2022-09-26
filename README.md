@@ -1,6 +1,6 @@
-# Página de gerenciamento de projetos - Costs
+<h1 align="center"> Página de gerenciamento de projetos - Costs </h1>
 
-<div>
+<div align="center">
 
 <img src="https://user-images.githubusercontent.com/72894980/192344421-bdafd508-5309-4c75-b52c-b4df8d9dfcba.png" width=350 heigth=300 />
 <img src="https://user-images.githubusercontent.com/72894980/192344430-bd691a1a-5cca-42ba-a244-74d014cf2f6a.png" width=350 heigth=300 />

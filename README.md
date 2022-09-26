@@ -19,7 +19,7 @@ src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react
 
 # Sobre o projeto
 
-## Nesse projeto usamos o conceito de consumo de API REST construindo um banco de dados em db.json para excluír, editar, adicionar e atualizar todo e qualquer projeto de forma dinâmica
+## Esse site é um gerenciador de projetos no qual tem como objetivo facilitar a organização, a criação e o custo de um projeto dependendo do seu tipo. Usamos o conceito de consumo de API REST construindo um banco de dados em db.json para excluír, editar, adicionar e atualizar todo e qualquer projeto de forma dinâmica
 <img src="https://user-images.githubusercontent.com/72894980/192345704-f45a77cf-5e98-4805-892f-b6e77e4288d2.png" width=500 heigth=480 /> </br>
 ## A criação de todo o site foi em React.JS, com estilização em Styled-Components.
 ## Navegação de rotas com o react-router-dom

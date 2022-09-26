@@ -2,10 +2,10 @@
 
 <div>
 
-<img src="https://user-images.githubusercontent.com/72894980/192344421-bdafd508-5309-4c75-b52c-b4df8d9dfcba.png" width=500 heigth=480 />
-<img src="https://user-images.githubusercontent.com/72894980/192344430-bd691a1a-5cca-42ba-a244-74d014cf2f6a.png" width=500 heigth=480 />
-<img src="https://user-images.githubusercontent.com/72894980/192344436-aab877d6-a3d3-4344-aaa0-1ada92215e3f.png" width=500 heigth=480 />
-<img src="https://user-images.githubusercontent.com/72894980/192344445-4b5a1464-38cf-498f-a97a-beb1a50d436c.png" width=500 heigth=480 />
+<img src="https://user-images.githubusercontent.com/72894980/192344421-bdafd508-5309-4c75-b52c-b4df8d9dfcba.png" width=350 heigth=300 />
+<img src="https://user-images.githubusercontent.com/72894980/192344430-bd691a1a-5cca-42ba-a244-74d014cf2f6a.png" width=350 heigth=300 />
+<img src="https://user-images.githubusercontent.com/72894980/192344436-aab877d6-a3d3-4344-aaa0-1ada92215e3f.png" width=350 heigth=300 />
+<img src="https://user-images.githubusercontent.com/72894980/192344445-4b5a1464-38cf-498f-a97a-beb1a50d436c.png" width=350 heigth=300 />
 
 </div>
 
